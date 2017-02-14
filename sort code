@@ -1,0 +1,72 @@
+package sort;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class ArrayQuickSort {
+int array[];
+int size;
+
+public ArrayQuickSort(int n) {
+size = n;
+// create array with size n+1
+array = new int[n + 1];
+// set the last element as big value
+array[n] = 999;
+
+}
+
+public void readFile() throws IOException {
+Scanner filescan =newScanner(newFileReader("input.txt"));
+int i = 0;
+while (filescan.hasNext() && i < size) {
+array[i] = filescan.nextInt();
+i++;
+}
+System.out.println("The Array of Element are :");
+for (int j = 0; j < size; j++) {
+System.out.print(array[j] + " ");
+
+filescan.close();
+}
+System.out.println();
+}
+public void merge(int left, int mid, int right) {
+int temp[] = new int[right - left + 1];
+int i = left;
+int j = mid + 1;
+int k = 0;
+while (i <= mid && j <= right) {
+if (array[i] <= array[j]) {
+temp[k] = array[i];
+k++;
+i++;
+} else {
+// array[i]>array[j]
+
+temp[k] = array[j];
+k++;
+j++;
+}
+}
+while (j <= right)
+temp[k++] = array[j++];
+while (i <= mid)
+temp[k++] = array[i++];
+
+for (k = 0; k < temp.length; k++)
+array[left + k] = temp[k];
+
+}
+// merge sort end here
+
+public void print(){
+
+System.out.println("Contents of the Array");
+for (int k = 0; k < size; k++) {
+System.out.print(array[k] + " | ");
+}
+System.out.println();
+
+}
